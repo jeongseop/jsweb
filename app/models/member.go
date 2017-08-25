@@ -7,17 +7,10 @@ import (
 )
 
 type Member struct {
-<<<<<<< HEAD
 	UserId         string `db:"id,size:45"`
 	Password       string
 	Email          string `db:"email,size:255"`
 	HashedPassword []byte `db:"password"`
-=======
-	UserId             string `db:"id,size:45"`
-	Password	   string
-	Email		   string `db:"email,size:255"`
-	HashedPassword     []byte `db:"password"`
->>>>>>> upstream/master
 }
 
 func (m *Member) String() string {
