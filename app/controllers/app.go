@@ -2,25 +2,17 @@ package controllers
 
 import (
 	"github.com/revel/revel"
-<<<<<<< HEAD
 	"myweb/app/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type App struct {
 	GorpController
-=======
-)
-
-type App struct {
-	*revel.Controller
->>>>>>> 98b93d1... 최초등록
 }
 
 func (c App) Index() revel.Result {
 	return c.Render()
 }
-<<<<<<< HEAD
 
 func (c App) Blog() revel.Result {
 	return c.Render()
@@ -53,5 +45,3 @@ func (c App) Login(id, password string) revel.Result {
 	c.Flash.Error("Login failed")
 	return c.Render()
 }
-=======
->>>>>>> 98b93d1... 최초등록
