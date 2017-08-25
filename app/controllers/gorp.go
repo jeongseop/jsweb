@@ -32,7 +32,11 @@ func getConnectionString() string {
 func InitDB() {
 	dbConnectString := getConnectionString()
 	if dbConnectString == "" {
+<<<<<<< HEAD
 		log.Fatal("fatal")
+=======
+		log.Fatal("getConnectionString failed!!!")
+>>>>>>> upstream/master
 	}
 	db, err := sql.Open("mysql", dbConnectString)
 	if err != nil {
@@ -46,7 +50,11 @@ func InitDB() {
 		}
 	}
 
+<<<<<<< HEAD
 	t := Dbm.AddTableWithName(models.Member{}, "member").SetKeys(false, "UserId")
+=======
+	t := Dbm.AddTable(models.Member{}).SetKeys(false, "UserId")
+>>>>>>> upstream/master
 	t.ColMap("Password").Transient = true
 	setColumnSizes(t, map[string]int{})
 
