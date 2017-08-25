@@ -7,10 +7,10 @@ import (
 )
 
 type Member struct {
-	UserId             string
+	UserId             string `db:"id,size:45"`
 	Password	   string
-	Email		   string
-	HashedPassword     []byte
+	Email		   string `db:"email,size:255"`
+	HashedPassword     []byte `db:"password"`
 }
 
 func (m *Member) String() string {
