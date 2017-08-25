@@ -1,13 +1,13 @@
 package controllers
 
 import (
-	"github.com/go-gorp/gorp"
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
-	r "github.com/revel/revel"
-	"myweb/app/models"
-	"golang.org/x/crypto/bcrypt"
 	"fmt"
+	"github.com/go-gorp/gorp"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jeongseop/jsweb/app/models"
+	r "github.com/revel/revel"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
@@ -31,7 +31,9 @@ func getConnectionString() string {
 
 func InitDB() {
 	dbConnectString := getConnectionString()
-	if dbConnectString == "" {log.Fatal("fatal")}
+	if dbConnectString == "" {
+		log.Fatal("fatal")
+	}
 	db, err := sql.Open("mysql", dbConnectString)
 	if err != nil {
 		panic(err)
@@ -44,11 +46,9 @@ func InitDB() {
 		}
 	}
 
-	t := Dbm.AddTable(models.Member{}).SetKeys(true, "UserId")
+	t := Dbm.AddTableWithName(models.Member{}, "member").SetKeys(false, "UserId")
 	t.ColMap("Password").Transient = true
-	setColumnSizes(t, map[string]int{
-		"Email": 60,
-	})
+	setColumnSizes(t, map[string]int{})
 
 	Dbm.TraceOn("[gorp]", r.INFO)
 	Dbm.CreateTables()

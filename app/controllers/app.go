@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"github.com/jeongseop/jsweb/app/models"
 	"github.com/revel/revel"
-	"myweb/app/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
