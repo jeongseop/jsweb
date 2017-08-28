@@ -16,10 +16,28 @@ var (
 )
 
 func getConnectionString() string {
-	c, err := ReadConfig("db.conf")
+	c, err := ReadConfig("../../conf/db.conf")
+	c2, err2 := ReadConfig("/home/gopher/go/src/github.com/jeongseop/jsweb/conf/db.conf")
+	c3, err3 := ReadConfig("github.com/jeongseop/jsweb/conf/db.conf")
+	c4, err4 := ReadConfig("/conf/db.conf")
 	if err != nil {
-		panic(err)
+		log.Println("t1")
 	}
+	if err2 != nil {
+		log.Println("t2")
+	}
+	if err3 != nil {
+		log.Println("t3")
+	}
+	if err4 != nil {
+		log.Println("t4")
+	}
+	panic(err)
+	host2 := getString(c2, "DEFAULT", "db.host")
+	host3 := getString(c3, "DEFAULT", "db.host")
+	host4 := getString(c4, "DEFAULT", "db.host")
+	log.Printf("2[%s] 3[%s] 4[%s]\n", host2, host3, host4)
+
 	host := getString(c, "DEFAULT", "db.host")
 	port := getString(c, "DEFAULT", "db.port")
 	user := getString(c, "DEFAULT", "db.user")
@@ -34,7 +52,7 @@ func getConnectionString() string {
 	password := r.Config.StringDefault("db.password", "")
 	protocol := r.Config.StringDefault("db.protocol", "tcp")
 	name := r.Config.StringDefault("db.name", "")
-*/
+	*/
 	log.Printf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
 
 	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
