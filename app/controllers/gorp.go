@@ -16,25 +16,20 @@ var (
 )
 
 func getConnectionString() string {
-	c, err := ReadConfig("db.conf")
-	if err != nil {
-		panic(err)
+	Config := NewCustomConfig()
+	if Config.LoadConfig("db.conf") != nil {
+		return ""
 	}
-	host := getString(c, "DEFAULT", "db.host")
-	port := getString(c, "DEFAULT", "db.port")
-	user := getString(c, "DEFAULT", "db.user")
-	password := getString(c, "DEFAULT", "db.password")
-	protocol := getString(c, "DEFAULT", "db.protocol")
-	name := getString(c, "DEFAULT", "db.name")
+	if !Config.SetSection("DEFAULT") {
+		return ""
+	}
+	host := Config.GetStringDefault("db.host", "localhost")
+	port := Config.GetStringDefault("db.port", "3306")
+	user := Config.GetStringDefault("db.user", "user")
+	password := Config.GetStringDefault("db.password", "password")
+	protocol := Config.GetStringDefault("db.protocol", "tcp")
+	name := Config.GetStringDefault("db.name", "default")
 
-	/*r.Config.SetSection("dev")
-	host := r.Config.StringDefault("db.host", "localhost")
-	port := r.Config.StringDefault("db.port", "3306")
-	user := r.Config.StringDefault("db.user", "")
-	password := r.Config.StringDefault("db.password", "")
-	protocol := r.Config.StringDefault("db.protocol", "tcp")
-	name := r.Config.StringDefault("db.name", "")
-*/
 	log.Printf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
 
 	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
