@@ -58,13 +58,6 @@ func InitDB() {
 
 	Dbm.TraceOn("[gorp]", r.INFO)
 	Dbm.CreateTables()
-
-	bcryptPassword, _ := bcrypt.GenerateFromPassword(
-		[]byte("demo"), bcrypt.DefaultCost)
-	demoMember := &models.Member{"jeongseop", "demo", "jeongsub3312@naver.com", bcryptPassword}
-	if err := Dbm.Insert(demoMember); err != nil {
-		panic(err)
-	}
 }
 
 type GorpController struct {
