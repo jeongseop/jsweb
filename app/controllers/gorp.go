@@ -7,7 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jeongseop/jsweb/app/models"
 	r "github.com/revel/revel"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
@@ -16,43 +15,20 @@ var (
 )
 
 func getConnectionString() string {
-	c, err := ReadConfig("../../conf/db.conf")
-	c2, err2 := ReadConfig("/home/gopher/go/src/github.com/jeongseop/jsweb/conf/db.conf")
-	c3, err3 := ReadConfig("github.com/jeongseop/jsweb/conf/db.conf")
-	c4, err4 := ReadConfig("/conf/db.conf")
-	if err != nil {
-		log.Println("t1")
+	Config := NewCustomConfig()
+	if Config.LoadConfig("db.conf") != nil {
+		return ""
 	}
-	if err2 != nil {
-		log.Println("t2")
+	if !Config.SetSection("DEFAULT") {
+		return ""
 	}
-	if err3 != nil {
-		log.Println("t3")
-	}
-	if err4 != nil {
-		log.Println("t4")
-	}
-	panic(err)
-	host2 := getString(c2, "DEFAULT", "db.host")
-	host3 := getString(c3, "DEFAULT", "db.host")
-	host4 := getString(c4, "DEFAULT", "db.host")
-	log.Printf("2[%s] 3[%s] 4[%s]\n", host2, host3, host4)
+	host := Config.GetStringDefault("db.host", "localhost")
+	port := Config.GetStringDefault("db.port", "3306")
+	user := Config.GetStringDefault("db.user", "user")
+	password := Config.GetStringDefault("db.password", "password")
+	protocol := Config.GetStringDefault("db.protocol", "tcp")
+	name := Config.GetStringDefault("db.name", "default")
 
-	host := getString(c, "DEFAULT", "db.host")
-	port := getString(c, "DEFAULT", "db.port")
-	user := getString(c, "DEFAULT", "db.user")
-	password := getString(c, "DEFAULT", "db.password")
-	protocol := getString(c, "DEFAULT", "db.protocol")
-	name := getString(c, "DEFAULT", "db.name")
-
-	/*r.Config.SetSection("dev")
-	host := r.Config.StringDefault("db.host", "localhost")
-	port := r.Config.StringDefault("db.port", "3306")
-	user := r.Config.StringDefault("db.user", "")
-	password := r.Config.StringDefault("db.password", "")
-	protocol := r.Config.StringDefault("db.protocol", "tcp")
-	name := r.Config.StringDefault("db.name", "")
-	*/
 	log.Printf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
 
 	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
@@ -81,13 +57,6 @@ func InitDB() {
 
 	Dbm.TraceOn("[gorp]", r.INFO)
 	Dbm.CreateTables()
-
-	bcryptPassword, _ := bcrypt.GenerateFromPassword(
-		[]byte("demo"), bcrypt.DefaultCost)
-	demoMember := &models.Member{"jeongseop", "demo", "jeongsub3312@naver.com", bcryptPassword}
-	if err := Dbm.Insert(demoMember); err != nil {
-		panic(err)
-	}
 }
 
 type GorpController struct {
