@@ -5,7 +5,6 @@ import (
 	"github.com/jeongseop/jsweb/app/routes"
 	"github.com/revel/revel"
 	"golang.org/x/crypto/bcrypt"
-	"log"
 )
 
 type App struct {
