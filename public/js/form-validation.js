@@ -3,6 +3,30 @@ jQuery(document).ready(function($){
 	// hide messages 
 	$("#error").hide();
 	$("#sent-form-msg").hide();
+
+	// login submit...
+	$("#loginForm #submit").click(function() {
+		$("#error").hide();
+
+		//required:
+
+		//id
+		var id = $("input#id").val();
+		if(id == ""){
+			$("#error").fadeIn().text("ID required.");
+			$("input#id").focus();
+			return false;
+		}
+
+		// password
+		var password = $("input#password").val();
+		if(password == ""){
+			$("#error").fadeIn().text("Password required");
+			$("input#password").focus();
+			return false;
+		}
+		return true;
+	});
 	
 	// on submit...
 	$("#contactForm #submit").click(function() {

@@ -9,7 +9,18 @@ module:testrunner
 
 GET     /                                       App.Index
 GET     /blog                                   App.Blog
-GET     /login                                  App.Login
+GET     /loginForm                              App.LoginForm
+POST    /login                                  App.Login
+
+GET     /page                                   App.Page
+GET     /elements                               App.Elements
+GET     /icons                                  App.Icons
+GET     /typography                             App.Typography
+GET     /sidebar                                App.Sidebar
+GET     /contact                                App.Contact
+GET     /portfolio                              App.Portfolio
+GET     /project                                App.Project
+GET     /single                                 App.Single
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

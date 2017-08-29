@@ -7,7 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jeongseop/jsweb/app/models"
 	r "github.com/revel/revel"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
