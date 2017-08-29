@@ -1,0 +1,33 @@
+{{set . "title" "login page"}}
+{{set . "body" "page"}}
+{{template "header.html" .}}
+		<!-- MAIN -->
+		<div id="main">
+			<div class="wrapper cf">
+			<!-- page content-->
+        	<div id="page-content" class="cf">
+				<p><h3>LOGIN FORM</h3></p>
+				<!-- form -->
+				<script type="text/javascript" src="/public/js/form-validation.js"></script>
+				<form id="loginForm" action="/login" method="post">
+					<fieldset>
+						<p>
+							<label for="id" >ID</label>
+							<input name="id"  id="id" type="text" class="form-poshytip" title="Enter your login ID" />
+						</p>
+						
+						<p>
+							<label for="password" style="width:58px;" >Password</label>
+							<input name="password"  id="password" type="password" class="form-poshytip" title="Enter your login password" />
+						</p>
+						
+						<p><input type="submit" value="로그인" name="submit" id="submit" /> <span id="error" class="warning">Message</span></p>
+					</fieldset>
+					
+				</form>
+    		</div>
+    		<!-- ENDS page content-->
+			</div><!-- ENDS WRAPPER -->
+		</div>
+		<!-- ENDS MAIN -->
+{{template "footer.html" .}}
