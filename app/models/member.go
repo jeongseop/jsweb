@@ -8,7 +8,7 @@ import (
 
 type Member struct {
 	UserId         string `db:"id,size:45"`
-	Password       string
+	Pwd            string
 	Email          string `db:"email,size:255"`
 	HashedPassword []byte `db:"password"`
 }
@@ -27,8 +27,8 @@ func (memb *Member) Validate(v *revel.Validation) {
 		revel.Match{userRegex},
 	)
 
-	ValidatePassword(v, memb.Password).
-		Key("memb.Password")
+	ValidatePassword(v, memb.Pwd).
+		Key("memb.Pwd")
 
 	v.Check(memb.Email,
 		revel.Required{},

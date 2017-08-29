@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"github.com/jeongseop/jsweb/app/models"
+	"github.com/jeongseop/jsweb/app/routes"
 	"github.com/revel/revel"
 	"golang.org/x/crypto/bcrypt"
-	"github.com/jeongseop/jsweb/app/routes"
+	"log"
 )
 
 type App struct {
@@ -24,14 +25,12 @@ func (c App) LoginForm() revel.Result {
 }
 
 func (c App) getUser(id string) *models.Member {
-	users, err := c.Txn.Select(models.Member{}, `select * from member where id = ?`, id)
+	var m *models.Member
+	err := c.Txn.SelectOne(&m, `select * from member where id = ?`, id)
 	if err != nil {
 		panic(err)
 	}
-	if len(users) == 0 {
-		return nil
-	}
-	return users[0].(*models.Member)
+	return m
 }
 
 func (c App) Login(id, password string) revel.Result {

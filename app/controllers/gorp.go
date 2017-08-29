@@ -52,7 +52,7 @@ func InitDB() {
 	}
 
 	t := Dbm.AddTableWithName(models.Member{}, "member").SetKeys(false, "UserId")
-	t.ColMap("Password").Transient = true
+	t.ColMap("Pwd").Transient = true
 	setColumnSizes(t, map[string]int{})
 
 	Dbm.TraceOn("[gorp]", r.INFO)
