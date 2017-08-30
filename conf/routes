@@ -9,8 +9,9 @@ module:testrunner
 
 GET     /                                       App.Index
 GET     /blog                                   App.Blog
-GET     /loginForm                              App.LoginForm
+GET     /login                                  App.LoginForm
 POST    /login                                  App.Login
+GET     /logout                                 App.Logout
 
 GET     /page                                   App.Page
 GET     /elements                               App.Elements
