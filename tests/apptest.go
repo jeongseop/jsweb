@@ -2,6 +2,7 @@ package tests
 
 import (
 	"github.com/revel/revel/testing"
+	"net/url"
 )
 
 type AppTest struct {
@@ -14,6 +15,30 @@ func (t *AppTest) Before() {
 
 func (t *AppTest) TestThatIndexPageWorks() {
 	t.Get("/")
+	t.AssertOk()
+	t.AssertContentType("text/html; charset=utf-8")
+}
+
+func (t *AppTest) TestBlogPageWorks() {
+	t.Get("/blog")
+	t.AssertOk()
+	t.AssertContentType("text/html; charset=utf-8")
+}
+
+func (t *AppTest) TestLoginForm() {
+	t.Get("/login")
+	t.AssertOk()
+	t.AssertContentType("text/html; charset=utf-8")
+}
+func (t *AppTest) TestLogin() {
+	t.PostForm("/login", url.Values{"id":{"jeongseop"}, "password":{"demo"}})
+
+	t.AssertOk()
+	t.AssertContentType("text/html; charset=utf-8")
+}
+func (t *AppTest) TestLogout() {
+	t.Get("/logout")
+
 	t.AssertOk()
 	t.AssertContentType("text/html; charset=utf-8")
 }

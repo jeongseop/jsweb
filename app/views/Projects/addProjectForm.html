@@ -1,0 +1,65 @@
+{{set . "title" "adding project page"}}
+{{set . "body" "page"}}
+{{template "header.html" .}}
+		<!-- MAIN -->
+		<div id="main">
+			<div class="wrapper cf">
+			
+			
+				
+			<!-- page content-->
+        	<div id="page-content" class="cf">
+
+
+				<p><h3>ADD PROJECT FORM</h3></p>
+				<p>추가할 프로젝트 정보를 입력하세요.</p>
+				<!-- form -->
+				<script type="text/javascript" src="/public/js/form-validation.js"></script>
+				<form id="projectform" action="/projects" method="post">
+					<fieldset>
+						<p>
+							<label for="project.ProjectName" >Name</label>
+							<input name="project.ProjectName"  id="project.ProjectName" type="text" class="form-poshytip" title="프로젝트명을 입력하세요" />
+						</p>
+
+						<p>
+							<label for="project.ProjectComment">Message</label>
+							<textarea  name="project.ProjectComment"  id="project.ProjectComment" rows="5" cols="20" class="form-poshytip" title="프로젝트 설명을 입력하세요"></textarea>
+						</p>
+
+						<p>
+							<label for="project.CompanyName" >Company Name</label>
+							<input name="project.CompanyName"  id="project.CompanyName" type="text" class="form-poshytip" title="프로젝트 참가 회사명을 입력하세요" />
+						</p>
+						
+						<p>
+							<label for="project.StartDate">Start Date</label>
+							<input name="project.StartDate"  id="project.StartDate" type="text" class="form-poshytip" title="프로젝트 시작일을 입력하세요" />
+						</p>
+
+						<p>
+							<label for="project.EndDate">End Date</label>
+							<input name="project.EndDate"  id="project.EndDate" type="text" class="form-poshytip" title="프로젝트 종료일을 입력하세요" />
+						</p>
+
+						<p>
+							<label for="project.LaunchUrl">Launch URL</label>
+							<input name="project.LaunchUrl"  id="project.LaunchUrl" type="text" class="form-poshytip" title="프로젝트 관련 URL을 입력하세요" />
+						</p>
+						
+						<p><input type="submit" value="Send" name="submit" id="submit" /> <span id="error" class="warning">Message</span></p>
+					</fieldset>
+					
+				</form>
+				<p id="sent-form-msg" class="success">Form data sent. Thanks for your comments.</p>
+				<!-- ENDS form -->				
+				
+    		</div>
+    		<!-- ENDS page content-->
+			
+			
+			
+			</div><!-- ENDS WRAPPER -->
+		</div>
+		<!-- ENDS MAIN -->
+{{template "footer.html" .}}

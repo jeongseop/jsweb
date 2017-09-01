@@ -4,15 +4,11 @@
 		<!-- MAIN -->
 		<div id="main">
 			<div class="wrapper cf">
-			
-			
-				
+
 			<!-- portfolio content-->
         	<div id="portfolio-content" class="cf">        	
 				
-				
-				
-				
+
 				<!-- project pager -->
 				<div class="project-pager cf">
 					<a class="previous-project" href="#">&#8592; Previous project</a>
@@ -23,11 +19,8 @@
 					
 					<!-- project box -->
 				<div id="project-box" class="cf">
-				
-				
-					
-				
-				
+
+
 					<!-- slider -->
 					<div class="project-slider">
 				        <div class="flexslider">
@@ -46,10 +39,9 @@
 					</div>
 		        	<!-- ENDS slider -->
 
-
 					<div class="info">
-	        			<p><strong>Client </strong> Mr. Tanaka</p>
-	        			<p><strong>Date </strong> April 25, 2012</p>
+	        			<p><strong>Company </strong> {{.project.CompanyName}}</p>
+	        			<p><strong>Period </strong> {{getStringFromUnixnano .project.StartDateTime}} ~ {{getStringFromUnixnano .project.EndDateTime}}</p>
 	        			<p><a href="http://www.luiszuno.com" class="launch" >Launch Project</a></p>
 	        		</div>
 	        		

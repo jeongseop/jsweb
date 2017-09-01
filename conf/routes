@@ -20,7 +20,14 @@ GET     /typography                             App.Typography
 GET     /sidebar                                App.Sidebar
 GET     /contact                                App.Contact
 GET     /portfolio                              App.Portfolio
-GET     /project                                App.Project
+
+GET     /projects/new                           Projects.AddProjectForm
+GET     /projects/:id                           Projects.Project
+GET     /projects/:id/edit                      Projects.EditProjectForm
+POST    /projects                               Projects.AddProject
+PUT     /projects/:id                           Projects.UpdateProject
+DELETE  /projects/:id                           Projects.DeleteProject
+
 GET     /single                                 App.Single
 
 # Ignore favicon requests

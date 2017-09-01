@@ -5,7 +5,6 @@ import (
 	"github.com/jeongseop/jsweb/app/routes"
 	"github.com/revel/revel"
 	"golang.org/x/crypto/bcrypt"
-	"time"
 )
 
 type App struct {
@@ -22,30 +21,28 @@ func (c App) connected() *models.Member {
 	return nil
 }
 
-func (c App) getProjectList() []models.Project {
-	//var pList []models.Project
-	//_, err := c.Txn.Select(&pList, `select * from project`)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//return pList
-
-	t := make([]models.Project, 2)
-	t[0] = models.Project{0,"test1","test111111","comp1","web","20170830","20170830",time.Now(),time.Now()}
-	t[1] = models.Project{1,"test2","test222222","comp2","server","20170830","20170830",time.Now(),time.Now()}
-	return t
-}
-
 func (c App) Index() revel.Result {
 	memb := c.connected()
 	if memb != nil {
 		c.ViewArgs["user"] = memb
 	}
 
+	//Project Group List
+	proj_groups, err := c.Txn.Select(models.Project{},`select position from project group by position`);
+	if err != nil {
+		panic(err)
+	}
+	c.ViewArgs["project_groups"] = proj_groups
+
 	//Project List
-	var projList []models.Project
-	projList = c.getProjectList()
-	c.ViewArgs["portfolio_list"] = projList
+	projects, err := c.Txn.Select(models.Project{}, `select * from project order by start_date desc limit 10`)
+	if err != nil {
+		panic(err)
+	}
+	if len(projects) == 0 {
+		projects = nil
+	}
+	c.ViewArgs["projects"] = projects
 
 	return c.Render()
 }
@@ -64,13 +61,10 @@ func (c App) LoginForm() revel.Result {
 
 func (c App) getUser(id string) *models.Member {
 	var m *models.Member
-	//err := c.Txn.SelectOne(&m, `select * from member where id = ?`, id)
-	//if err != nil {
-	//	panic(err)
-	//}
-	bcryptPassword, _ := bcrypt.GenerateFromPassword(
-		[]byte("demo"), bcrypt.DefaultCost)
-	m = &models.Member{"jeongseop", "demo", "asdf@asdf.com", bcryptPassword}
+	err := c.Txn.SelectOne(&m, `select * from member where id = ?`, id)
+	if err != nil {
+		panic(err)
+	}
 	return m
 }
 
@@ -120,9 +114,7 @@ func (c App) Sidebar() revel.Result {
 func (c App) Contact() revel.Result {
 	return c.Render()
 }
-func (c App) Project() revel.Result {
-	return c.Render()
-}
+
 func (c App) Portfolio() revel.Result {
 	return c.Render()
 }
