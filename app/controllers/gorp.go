@@ -45,18 +45,21 @@ func InitDB() {
 	}
 	Dbm = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
 
-	//setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
-	//	for col, size := range colSizes {
-	//		t.ColMap(col).MaxSize = size
-	//	}
-	//}
+	setColumnSizes := func(t *gorp.TableMap, colSizes map[string]int) {
+		for col, size := range colSizes {
+			t.ColMap(col).MaxSize = size
+		}
+	}
 
 	t := Dbm.AddTableWithName(models.Member{}, "member").SetKeys(false, "UserId")
 	t.ColMap("Pwd").Transient = true
 	//setColumnSizes(t, map[string]int{})
 
 	t = Dbm.AddTableWithName(models.Project{}, "project").SetKeys(true, "ProjectId")
-	//setColumnSizes(t, map[string]int{})
+	setColumnSizes(t, map[string]int{
+		"ProjectComment":2048,
+		"LaunchUrl":1024,
+	})
 
 	Dbm.TraceOn("[gorp]", r.INFO)
 	if err := Dbm.CreateTablesIfNotExists(); err != nil {

@@ -2,12 +2,6 @@
 {{set . "body" "home"}}
 {{template "header.html" .}}
 
-<script>
-  {{if .flash.error}}
-  alert("{{.flash.error}}")
-  {{end}}
-</script>
-
 <!-- SLIDER -->
 <div id="home-slider" class="wrapper cf lof-slidecontent">
 
@@ -138,7 +132,7 @@
         {{if .user}}
         <figure class="{{range .project_groups}}{{.Position}} {{end}}">
           <figcaption>
-            <a href="/projects"><h3 class="heading">Add Project </h3></a>
+            <a href="/projects/new"><h3 class="heading">Add Project </h3></a>
             Add Project...
           </figcaption>
         </figure>

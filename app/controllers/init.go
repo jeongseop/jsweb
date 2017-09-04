@@ -56,4 +56,12 @@ func init() {
 		y, m, d := time.Unix(0, unixnano).Date()
 		return fmt.Sprintf("%04d%02d%02d",y,m,d)
 	}
+
+	revel.TemplateFuncs["replace"] = func(s, old, new string) string {
+		return strings.Replace(s, old, new,-1)
+	}
+
+	revel.TemplateFuncs["split"] = func(s, f string) []string {
+		return strings.Split(s, f)
+	}
 }

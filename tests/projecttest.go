@@ -2,6 +2,7 @@ package tests
 
 import (
 	"github.com/revel/revel/testing"
+	"net/url"
 )
 
 type ProjectTest struct {
@@ -20,8 +21,12 @@ func (t *ProjectTest) TestShowProject() {
 
 func (t *ProjectTest) TestAddProjectForm() {
 	t.Get("/projects/new")
-	t.AssertOk()
-	t.AssertContentType("text/html; charset=utf-8")
+	t.AssertNotFound()
+}
+
+func (t *ProjectTest) TestAddProject() {
+	t.PostForm("/projects",url.Values{"project.ProjectName":{"test"},"project.ProjectComment":{"test11"},"project.CompanyName":{"asdf"},"project.StartDate":{"20170904"},"project.EndDate":{"20170910"},"project.LaunchUrl":{"test111"}})
+	t.AssertNotFound()
 }
 
 func (t *ProjectTest) After() {

@@ -21,12 +21,12 @@ GET     /sidebar                                App.Sidebar
 GET     /contact                                App.Contact
 GET     /portfolio                              App.Portfolio
 
-GET     /projects/new                           Projects.AddProjectForm
+GET     /projects/new                           Projects.AddForm
 GET     /projects/:id                           Projects.Project
-GET     /projects/:id/edit                      Projects.EditProjectForm
-POST    /projects                               Projects.AddProject
-PUT     /projects/:id                           Projects.UpdateProject
-DELETE  /projects/:id                           Projects.DeleteProject
+GET     /projects/:id/edit                      Projects.AddForm
+POST    /projects                               Projects.Add
+PUT     /projects/:id                           Projects.Update
+DELETE  /projects/:id                           Projects.Delete
 
 GET     /single                                 App.Single
 

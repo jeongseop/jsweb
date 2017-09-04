@@ -35,11 +35,8 @@ func (c App) Index() revel.Result {
 	c.ViewArgs["project_groups"] = proj_groups
 
 	//Project List
-	projects, err := c.Txn.Select(models.Project{}, `select * from project order by start_date desc limit 10`)
-	if err != nil {
-		panic(err)
-	}
-	if len(projects) == 0 {
+	projects,err := c.Txn.Select(&models.Project{}, `select * from project`)
+	if err != nil || len(projects) == 0 {
 		projects = nil
 	}
 	c.ViewArgs["projects"] = projects

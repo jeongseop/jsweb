@@ -71,6 +71,17 @@
   <link rel="stylesheet" href="/public/css/flexslider.css" >
   <script src="/public/js/jquery.flexslider.js"></script>
 
+  <script>
+{{if .flash.error}}
+    alert("{{.flash.error}}")
+{{end}}
+{{if .errors}}
+  {{range .errors}}
+    alert("{{.Message}}")
+  {{end}}
+{{end}}
+  </script>
+
 </head>
 
 
