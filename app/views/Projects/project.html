@@ -6,17 +6,39 @@
 			<div class="wrapper cf">
 
 			<!-- portfolio content-->
-        	<div id="portfolio-content" class="cf">        	
-				
-
+        	<div id="portfolio-content" class="cf">
+				<script>
+				function deleteProject(id) {
+					if(confirm("삭제할까요?"))
+					{
+						deleteUrl = "/projects/" + id;
+						$.ajax({
+							type:"DELETE",
+							url:deleteUrl,
+							dataType:"text",
+							error:function(request,status,error) {
+								alert("삭제실패.. ["+request.responseText+"]");
+							},
+							success:function(data) {
+								alert("삭제되었습니다.");
+								document.location.href="/";
+							}
+						});
+					}
+				}
+				</script>
 				<!-- project pager -->
 				<div class="project-pager cf">
 					<a class="previous-project" href="#">&#8592; Previous project</a>
-					{{if .user}}<a style="float:none;" href="/projects/{{.project.ProjectId}}/edit">Edit project</a>{{end}}
+					{{if .user}}
+					<a style="float:none;" href="/projects/{{.project.ProjectId}}/edit">Edit project</a>
+					<a style="float:none;" href="#" onClick="deleteProject({{.project.ProjectId}})">Delete project</a>
+					{{end}}
 					<a class="next-project" href="#">Next project &#8594;</a>
 				</div>
 				<!-- ENDS project pager -->
-					
+
+				<form id="fProject" method="delete"></form>
 					
 					<!-- project box -->
 				<div id="project-box" class="cf">
@@ -43,7 +65,7 @@
 					<div class="info">
 	        			<p><strong>Company </strong> {{.project.CompanyName}}</p>
 	        			<p><strong>Period </strong> {{getStringFromUnixnano .project.StartDateTime}} ~ {{getStringFromUnixnano .project.EndDateTime}}</p>
-	        			<p><a href="http://www.luiszuno.com" class="launch" >Launch Project</a></p>
+	        			<p><a href="{{.project.LaunchUrl}}" target="_blank" class="launch" >Launch Project</a></p>
 	        		</div>
 	        		
 	        		<!-- entry-content -->

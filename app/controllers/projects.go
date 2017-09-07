@@ -4,10 +4,9 @@ import (
 	"github.com/jeongseop/jsweb/app/models"
 	"github.com/jeongseop/jsweb/app/routes"
 	"github.com/revel/revel"
-	"log"
-	"time"
 	"strings"
 	"fmt"
+	"errors"
 )
 
 type Projects struct {
@@ -40,54 +39,86 @@ func (c Projects) Project(id int) revel.Result {
 }
 
 func (c Projects) Add(project models.Project) revel.Result {
+	res := make(map[string] interface{})
 	memb := c.connected()
 	if memb == nil {
-		return c.NotFound("")
+		res["message"] = "not authorize"
+		c.Response.Status = 401
+		return c.RenderJSON(res)
 	}
 
-	st, err := time.Parse("20060102",project.StartDate)
-	log.Println(project.StartDate, st)
-	if err != nil {
-		c.Flash.Error("StartDate Parsing failed!!", err)
-		return c.Redirect(routes.Projects.AddForm(0))
-	}
-	project.StartDateTime = st.UnixNano()
-
-	ed, err := time.Parse("20060102",project.EndDate)
-	log.Println(project.EndDate, ed)
-	if err != nil {
-		c.Flash.Error("EndDate Parsing failed!!", err)
-		return c.Redirect(routes.Projects.AddForm(0))
-	}
-	project.EndDateTime = ed.UnixNano()
-
-	log.Printf("ttt[%s], [%s]\n",time.Unix(0,project.StartDateTime).String(),time.Unix(0,project.EndDateTime).String())
 	project.Validate(c.Validation)
 
 	if c.Validation.HasErrors() {
 		c.Validation.Keep()
 		c.FlashParams()
-		return c.Redirect(routes.App.Index())
+		res["message"] = c.Validation.Errors[0].String()
+		c.Response.Status = 500
+		return c.RenderJSON(res)
 	}
 
 	if err := c.Txn.Insert(&project); err != nil {
-		c.Flash.Error("Insert Error!!", err)
-		return c.Redirect(routes.Projects.AddForm(0))
+		res["message"] = "Insert Error!!"+ err.Error()
+		c.Response.Status = 500
+		return c.RenderJSON(res)
 	}
-	c.Flash.Success("Add New Project Success!!")
+	res["message"] = "Add New Project Success!!"
 
-	return c.Redirect(routes.App.Index())
+	return c.RenderJSON(res)
 }
-func (c Projects) Update(id int) revel.Result {
-	return c.Render()
+func (c Projects) Update(id int, project models.Project) revel.Result {
+	res := make(map[string] interface{})
+	memb := c.connected()
+	if memb == nil {
+		res["message"] = "not authorize"
+		c.Response.Status = 401
+		return c.RenderJSON(res)
+	}
+	project.ProjectId = id
+
+	project.Validate(c.Validation)
+
+	if c.Validation.HasErrors() {
+		c.Validation.Keep()
+		c.FlashParams()
+		res["message"] = c.Validation.Errors[0].String()
+		c.Response.Status = 500
+		return c.RenderJSON(res)
+	}
+
+	cnt, err := c.Txn.Update(&project)
+	if err != nil {
+		res["message"] = "Update Failed.. [" + err.Error() + "]"
+		c.Response.Status = 500
+		return c.RenderJSON(res)
+	}
+	res["message"] = fmt.Sprintf("Update Success! [%d] rows", cnt)
+	return c.RenderJSON(res)
 }
-func (c Projects) Delete(id int) revel.Result {
-	return c.Render()
+func (c Projects) Delete(id int, project models.Project) revel.Result {
+	res := make(map[string] interface{})
+	memb := c.connected()
+	if memb == nil {
+		res["message"] = "not authorize"
+		c.Response.Status = 401
+		return c.RenderJSON(res)
+	}
+	project.ProjectId = id
+
+	cnt, err := c.Txn.Delete(&project)
+	if err != nil {
+		res["message"] = "Delete Failed.. [" + err.Error() + "]"
+		c.Response.Status = 500
+		return c.RenderJSON(res)
+	}
+	res["message"] = fmt.Sprintf("Delete Success! [%d] rows", cnt)
+	return c.RenderJSON(res)
 }
 func (c Projects) AddForm(id int) revel.Result {
 	memb := c.connected()
 	if memb == nil {
-		return c.NotFound("")
+		c.Response.Status = 401
+		return c.RenderError(errors.New("Unauthenticated"))
 	}
 
 	if id > 0 {
@@ -98,8 +129,5 @@ func (c Projects) AddForm(id int) revel.Result {
 		}
 		c.ViewArgs["project"] = project
 	}
-	return c.Render()
-}
-func (c Projects) EditForm(id int) revel.Result {
 	return c.Render()
 }

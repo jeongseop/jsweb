@@ -1,8 +1,10 @@
 package models
 
-import (
+import  (
 	"fmt"
 	"github.com/revel/revel"
+	"errors"
+	"time"
 )
 
 
@@ -26,9 +28,6 @@ func (p *Project) String() string {
 }
 
 func (p *Project) Validate(v *revel.Validation) {
-	v.Required(p.StartDateTime).Message("StartDate를 입력해주세요")
-	v.Required(p.EndDateTime).Message("EndDate를 입력해주세요")
-
 	v.Check(p.ProjectName,
 		revel.Required{},
 		revel.MaxSize{64},
@@ -48,4 +47,20 @@ func (p *Project) Validate(v *revel.Validation) {
 	v.Check(p.LaunchUrl,
 		revel.MaxSize{255},
 	).Message("LaunchUrl 입력 오류!!")
+
+	var err error
+	if p.StartDateTime, err = ValidDate(p.StartDate);  err != nil {
+		v.Error("StartDate 입력 오류!!")
+	}
+	if p.EndDateTime, err = ValidDate(p.EndDate);  err != nil {
+		v.Error("EndDate 입력 오류!!")
+	}
+}
+
+func ValidDate(date string) (int64, error) {
+	tm, err := time.Parse("20060102",date)
+	if err != nil {
+		return 0, errors.New("date format error")
+	}
+	return tm.UnixNano(), nil
 }
