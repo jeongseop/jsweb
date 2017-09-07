@@ -71,10 +71,21 @@
   <link rel="stylesheet" href="/public/css/flexslider.css" >
   <script src="/public/js/jquery.flexslider.js"></script>
 
+  <script>
+{{if .flash.error}}
+    alert("{{.flash.error}}")
+{{end}}
+{{if .errors}}
+  {{range .errors}}
+    alert("{{.Message}}")
+  {{end}}
+{{end}}
+  </script>
+
 </head>
 
 
-<body class="home">
+<body class={{.body}}>
 
 <!-- HEADER -->
 <header>
@@ -87,16 +98,16 @@
     <!-- nav -->
     <ul id="nav" class="sf-menu">
       <li class="current-menu-item"><a href="/">HOME</a></li>
-      <li><a href="blog">BLOG</a></li>
-      <li><a href="page">ABOUT</a>
+      <li><a href="/blog">BLOG</a></li>
+      <li><a href="/page">ABOUT</a>
         <ul>
-          <li><a href="elements">Elements</a></li>
-          <li><a href="icons">Icons</a></li>
-          <li><a href="typography">Typography</a></li>
+          <li><a href="/elements">Elements</a></li>
+          <li><a href="/icons">Icons</a></li>
+          <li><a href="/typography">Typography</a></li>
         </ul>
       </li>
-      <li><a href="portfolio">WORK</a></li>
-      <li><a href="contact">CONTACT</a></li>
+      <li><a href="/portfolio">WORK</a></li>
+      <li><a href="/contact">CONTACT</a></li>
     </ul>
     <div id="combo-holder"></div>
     <!-- ends nav -->

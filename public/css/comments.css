@@ -205,22 +205,27 @@
   background: #cb5432;
 }
 #commentform,
+#projectform,
 #contactForm {
   margin-bottom: 70px;
 }
 #commentform .comment-notes,
+#projectform .comment-notes,
 #contactForm .comment-notes {
   margin-bottom: 30px;
 }
 #commentform .form-allowed-tags,
+#projectform .form-allowed-tags,
 #contactForm .form-allowed-tags {
   margin-bottom: 20px;
   font-size: 11px;
   color: #888;
 }
 #commentform input,
+#projectform input,
 #contactForm input,
 #commentform textarea,
+#projectform textarea,
 #contactForm textarea {
   padding: 10px 15px;
   background: #f1f1f1;
@@ -232,8 +237,10 @@
   overflow: auto;
 }
 #commentform input:focus,
+#projectform input:focus,
 #contactForm input:focus,
 #commentform textarea:focus,
+#projectform textarea:focus,
 #contactForm textarea:focus {
   background: #fff;
   -webkit-box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
@@ -242,8 +249,10 @@
   box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
 }
 #commentform input[type="text"],
+#projectform input[type="text"],
 #contactForm input[type="text"],
 #commentform input[type="password"],
+#projectform input[type="password"],
 #contactForm input[type="password"] {
   overflow: auto;
   width: 50%;
@@ -252,6 +261,7 @@
   overflow: hidden;
 }
 #commentform textarea,
+#projectform textarea,
 #contactForm textarea {
   width: 93.1818%;
   height: 230px;
@@ -259,8 +269,10 @@
   margin-bottom: 10px;
 }
 #commentform input[type="submit"],
+#projectform input[type="submit"],
 #contactForm input[type="submit"],
 #commentform input[type="button"],
+#projectform input[type="button"],
 #contactForm input[type="button"] {
   width: auto;
   color: #444;
@@ -279,28 +291,159 @@
   cursor: pointer;
 }
 #commentform input[type="submit"]:hover,
+#projectform input[type="submit"]:hover,
 #contactForm input[type="submit"]:hover,
 #commentform input[type="button"]:hover,
+#projectform input[type="button"]:hover,
 #contactForm input[type="button"]:hover {
   background: #cb5432;
 }
 #commentform input#submit,
+#projectform input#submit,
 #contactForm input#submit {
   margin-top: 7px;
 }
 #commentform label,
+#projectform label,
 #contactForm label {
   display: block;
 }
 #commentform p,
+#projectform p,
 #contactForm p {
   margin-bottom: 20px;
 }
 #commentform #error,
+#projectform #error,
 #contactForm #error {
   margin-left: 10px;
 }
 #commentform #sent-form-msg,
+#projectform #sent-form-msg,
+#contactForm #sent-form-msg {
+  padding: 5px 10px;
+  margin-bottom: 40px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #444;
+}
+
+
+#commentform,
+#projectform,
+#contactForm {
+  margin-bottom: 70px;
+}
+#commentform .comment-notes,
+#projectform .comment-notes,
+#contactForm .comment-notes {
+  margin-bottom: 30px;
+}
+#commentform .form-allowed-tags,
+#projectform .form-allowed-tags,
+#contactForm .form-allowed-tags {
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: #888;
+}
+#commentform input,
+#projectform input,
+#contactForm input,
+#commentform textarea,
+#projectform textarea,
+#contactForm textarea {
+  padding: 10px 15px;
+  background: #f1f1f1;
+  color: #484848;
+  border: 1px  solid #ccc;
+  font-size: 13px;
+  font-family: Helvetica, Arial;
+  line-height: 1.5em;
+  overflow: auto;
+}
+#commentform input:focus,
+#projectform input:focus,
+#contactForm input:focus,
+#commentform textarea:focus,
+#projectform textarea:focus,
+#contactForm textarea:focus {
+  background: #fff;
+  -webkit-box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
+  -moz-box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
+  -o-box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
+  box-shadow: 0px 0px 3px rgba(251, 228, 113, 0.4);
+}
+#commentform input[type="text"],
+#projectform input[type="text"],
+#contactForm input[type="text"],
+#commentform input[type="password"],
+#projectform input[type="password"],
+#contactForm input[type="password"] {
+  overflow: auto;
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+#commentform textarea,
+#projectform textarea,
+#contactForm textarea {
+  width: 93.1818%;
+  height: 230px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#commentform input[type="submit"],
+#projectform input[type="submit"],
+#contactForm input[type="submit"],
+#commentform input[type="button"],
+#projectform input[type="button"],
+#contactForm input[type="button"] {
+  width: auto;
+  color: #444;
+  font-size: 11px;
+  background: #eaeaea;
+  padding: 3px 10px;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+#commentform input[type="submit"]:hover,
+#projectform input[type="submit"]:hover,
+#contactForm input[type="submit"]:hover,
+#commentform input[type="button"]:hover,
+#projectform input[type="button"]:hover,
+#contactForm input[type="button"]:hover {
+  background: #cb5432;
+}
+#commentform input#submit,
+#projectform input#submit,
+#contactForm input#submit {
+  margin-top: 7px;
+}
+#commentform label,
+#projectform label,
+#contactForm label {
+  display: block;
+}
+#commentform p,
+#projectform p,
+#contactForm p {
+  margin-bottom: 20px;
+}
+#commentform #error,
+#projectform #error,
+#contactForm #error {
+  margin-left: 10px;
+}
+#commentform #sent-form-msg,
+#projectform #sent-form-msg,
 #contactForm #sent-form-msg {
   padding: 5px 10px;
   margin-bottom: 40px;

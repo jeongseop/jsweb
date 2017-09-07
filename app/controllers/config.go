@@ -2,23 +2,26 @@ package controllers
 
 import (
 	"github.com/revel/config"
-	"path/filepath"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 type CustomConfig struct {
-	Config *config.Context
-	FilePaths []string
+	Config         *config.Context
+	FilePaths      []string
 	CurrentSection string
 }
+
 const (
 	//jsweb path
 	jsweb = "github.com/jeongseop/jsweb"
 )
+
 var (
 	currentSection string
 )
+
 func NewCustomConfig() *CustomConfig {
 	c := CustomConfig{}
 	jswebConf := filepath.Join(jsweb, "conf")
@@ -30,7 +33,7 @@ func (c *CustomConfig) AddFilePath(path string) {
 	sourcePath := filepath.Join(os.Getenv("GOPATH"), "src")
 	c.FilePaths = append(
 		[]string{filepath.Join(sourcePath, path)},
-		c.FilePaths...
+		c.FilePaths...,
 	)
 }
 func (c *CustomConfig) LoadConfig(fname string) error {

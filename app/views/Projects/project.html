@@ -1,0 +1,127 @@
+{{set . "title" "project page"}}
+{{set . "body" ""}}
+{{template "header.html" .}}
+		<!-- MAIN -->
+		<div id="main">
+			<div class="wrapper cf">
+
+			<!-- portfolio content-->
+        	<div id="portfolio-content" class="cf">
+				<script>
+				function deleteProject(id) {
+					if(confirm("삭제할까요?"))
+					{
+						deleteUrl = "/projects/" + id;
+						$.ajax({
+							type:"DELETE",
+							url:deleteUrl,
+							dataType:"text",
+							error:function(request,status,error) {
+								alert("삭제실패.. ["+request.responseText+"]");
+							},
+							success:function(data) {
+								alert("삭제되었습니다.");
+								document.location.href="/";
+							}
+						});
+					}
+				}
+				</script>
+				<!-- project pager -->
+				<div class="project-pager cf">
+					<a class="previous-project" href="#">&#8592; Previous project</a>
+					{{if .user}}
+					<a style="float:none;" href="/projects/{{.project.ProjectId}}/edit">Edit project</a>
+					<a style="float:none;" href="#" onClick="deleteProject({{.project.ProjectId}})">Delete project</a>
+					{{end}}
+					<a class="next-project" href="#">Next project &#8594;</a>
+				</div>
+				<!-- ENDS project pager -->
+
+				<form id="fProject" method="delete"></form>
+					
+					<!-- project box -->
+				<div id="project-box" class="cf">
+
+
+					<!-- slider -->
+					<div class="project-slider">
+				        <div class="flexslider">
+						  <ul class="slides">
+						    <li>
+						      <img src="/public/img/dummies/slides/01.jpg" alt="alt text" />
+						    </li>
+						    <li>
+						      <img src="/public/img/dummies/slides/02.jpg" alt="alt text" />
+						    </li>
+						    <li>
+						      <img src="/public/img/dummies/slides/03.jpg" alt="alt text" />
+						    </li>
+						  </ul>
+						</div>
+					</div>
+		        	<!-- ENDS slider -->
+
+					<div class="info">
+	        			<p><strong>Company </strong> {{.project.CompanyName}}</p>
+	        			<p><strong>Period </strong> {{getStringFromUnixnano .project.StartDateTime}} ~ {{getStringFromUnixnano .project.EndDateTime}}</p>
+	        			<p><a href="{{.project.LaunchUrl}}" target="_blank" class="launch" >Launch Project</a></p>
+	        		</div>
+	        		
+	        		<!-- entry-content -->
+	        		<div class="entry-content">
+	        		
+	        			<h2 class="heading">{{.project.ProjectName}}</h2>
+
+	        			<div class="multicolumn">
+							<pre>
+								{{range .project.CommentList}}
+								<p>{{.}}</p>
+								{{end}}
+							</pre>
+	        			</div>
+	        		</div>
+	        		<!-- ENDS entry content -->
+	        		
+	        	</div>
+		    	<!-- ENDS project box -->
+					
+					
+				<!-- related -->
+				<div class="related-projects">
+					<h4 class="related-heading">Related projects</h4>
+					<div class="related-list cf">
+						<figure>
+							<a href="#" class="thumb"><img src="/public/img/dummies/slides/01.jpg" alt="Alt text" /></a>
+							<a href="/single" class="heading">Pellentesque habitant morbi</a>
+						</figure>
+						
+						<figure>
+							<a href="#" class="thumb"><img src="/public/img/dummies/slides/02.jpg" alt="Alt text" /></a>
+							<a href="/single" class="heading">Pellentesque habitant morbi</a>
+						</figure>
+						
+						<figure> 
+							<a href="#" class="thumb"><img src="/public/img/dummies/slides/03.jpg" alt="Alt text" /></a>
+							<a href="/single" class="heading">Pellentesque habitant morbi</a>
+						</figure>
+						
+						<figure>
+							<a href="#" class="thumb"><img src="/public/img/dummies/slides/04.jpg" alt="Alt text" /></a>
+							<a href="/single" class="heading">Pellentesque habitant morbi</a>
+						</figure>
+						
+					</div>
+				</div>
+				<!-- ENDS related -->
+									
+				
+    		</div>
+    		<!-- ENDS portfolio content-->
+			
+			
+			
+			</div><!-- ENDS WRAPPER -->
+		</div>
+		<!-- ENDS MAIN -->
+{{template "footer.html" .}}

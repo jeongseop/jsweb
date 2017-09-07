@@ -7,7 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jeongseop/jsweb/app/models"
 	r "github.com/revel/revel"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
@@ -53,16 +52,17 @@ func InitDB() {
 	}
 
 	t := Dbm.AddTableWithName(models.Member{}, "member").SetKeys(false, "UserId")
-	t.ColMap("Password").Transient = true
-	setColumnSizes(t, map[string]int{})
+	t.ColMap("Pwd").Transient = true
+	//setColumnSizes(t, map[string]int{})
+
+	t = Dbm.AddTableWithName(models.Project{}, "project").SetKeys(true, "ProjectId")
+	setColumnSizes(t, map[string]int{
+		"ProjectComment":2048,
+		"LaunchUrl":1024,
+	})
 
 	Dbm.TraceOn("[gorp]", r.INFO)
-	Dbm.CreateTables()
-
-	bcryptPassword, _ := bcrypt.GenerateFromPassword(
-		[]byte("demo"), bcrypt.DefaultCost)
-	demoMember := &models.Member{"jeongseop", "demo", "jeongsub3312@naver.com", bcryptPassword}
-	if err := Dbm.Insert(demoMember); err != nil {
+	if err := Dbm.CreateTablesIfNotExists(); err != nil {
 		panic(err)
 	}
 }
