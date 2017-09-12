@@ -19,12 +19,6 @@ func (t *AppTest) TestThatIndexPageWorks() {
 	t.AssertContentType("text/html; charset=utf-8")
 }
 
-func (t *AppTest) TestBlogPageWorks() {
-	t.Get("/blog")
-	t.AssertOk()
-	t.AssertContentType("text/html; charset=utf-8")
-}
-
 func (t *AppTest) TestLoginForm() {
 	t.Get("/login")
 	t.AssertOk()

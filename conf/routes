@@ -8,7 +8,6 @@ module:testrunner
 
 
 GET     /                                       App.Index
-GET     /blog                                   App.Blog
 GET     /login                                  App.LoginForm
 POST    /login                                  App.Login
 GET     /logout                                 App.Logout
@@ -28,7 +27,11 @@ POST    /projects                               Projects.Add
 PUT     /projects/:id                           Projects.Update
 DELETE  /projects/:id                           Projects.Delete
 
-GET     /single                                 App.Single
+GET     /blogs                                  Blogs.List
+GET     /blogs/:id                              Blogs.View
+POST    /blogs/:id                              Blogs.Add
+PUT     /blogs/:id                              Blogs.Update
+DELETE  /blogs/:id                              Blogs.Delete
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

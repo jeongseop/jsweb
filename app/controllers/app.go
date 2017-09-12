@@ -44,10 +44,6 @@ func (c App) Index() revel.Result {
 	return c.Render()
 }
 
-func (c App) Blog() revel.Result {
-	return c.Render()
-}
-
 func (c App) LoginForm() revel.Result {
 	memb := c.connected()
 	if memb != nil {
@@ -113,8 +109,5 @@ func (c App) Contact() revel.Result {
 }
 
 func (c App) Portfolio() revel.Result {
-	return c.Render()
-}
-func (c App) Single() revel.Result {
 	return c.Render()
 }
