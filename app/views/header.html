@@ -71,6 +71,14 @@
   <link rel="stylesheet" href="/public/css/flexslider.css" >
   <script src="/public/js/jquery.flexslider.js"></script>
 
+  {{range .moreStyles}}
+    <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+  {{end}}
+
+  {{range .moreScripts}}
+  <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+  {{end}}
+
   <script>
 {{if .flash.error}}
     alert("{{.flash.error}}")

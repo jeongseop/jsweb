@@ -52,8 +52,8 @@ func init() {
 		return str[:length]
 	}
 
-	revel.TemplateFuncs["getStringFromUnixnano"] = func(unixnano int64) string {
-		y, m, d := time.Unix(0, unixnano).Date()
+	revel.TemplateFuncs["getStringFromUnix"] = func(unix int64) string {
+		y, m, d := time.Unix(unix, 0).Date()
 		return fmt.Sprintf("%04d%02d%02d",y,m,d)
 	}
 

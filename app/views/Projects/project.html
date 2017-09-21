@@ -37,8 +37,6 @@
 					<a class="next-project" href="#">Next project &#8594;</a>
 				</div>
 				<!-- ENDS project pager -->
-
-				<form id="fProject" method="delete"></form>
 					
 					<!-- project box -->
 				<div id="project-box" class="cf">
@@ -64,7 +62,7 @@
 
 					<div class="info">
 	        			<p><strong>Company </strong> {{.project.CompanyName}}</p>
-	        			<p><strong>Period </strong> {{getStringFromUnixnano .project.StartDateTime}} ~ {{getStringFromUnixnano .project.EndDateTime}}</p>
+	        			<p><strong>Period </strong> {{getStringFromUnix .project.StartDateTime}} ~ {{getStringFromUnix .project.EndDateTime}}</p>
 	        			<p><a href="{{.project.LaunchUrl}}" target="_blank" class="launch" >Launch Project</a></p>
 	        		</div>
 	        		

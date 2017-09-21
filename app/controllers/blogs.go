@@ -9,11 +9,16 @@ type Blogs struct {
 	App
 }
 
+const (
+	DEFAULT_IMAGE_PATH="/public/upload/default/"
+)
+
 func (c Blogs) List() revel.Result {
 	memb := c.connected()
 	if memb != nil {
 		c.ViewArgs["user"] = memb
 	}
+
 	return c.Render()
 }
 
@@ -27,6 +32,18 @@ func (c Blogs) View() revel.Result {
 
 func (c Blogs) Add() revel.Result {
 	c.Response.Status = 501
+/*
+	if err := c.Request.ParseMultipartForm(32 << 20); err != nil {
+
+	}
+
+	mpartfile, mpartHeader, err := c.Request.FormFile("upload")
+	if err != nil {
+
+	}
+	defer mpartfile.Close()
+	imagePath := revel.Config.StringDefault("upload.image.path",DEFAULT_IMAGE_PATH)
+*/
 	return c.Render()
 }
 func (c Blogs) Update() revel.Result {

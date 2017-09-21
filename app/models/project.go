@@ -62,5 +62,5 @@ func ValidDate(date string) (int64, error) {
 	if err != nil {
 		return 0, errors.New("date format error")
 	}
-	return tm.UnixNano(), nil
+	return tm.Unix(), nil
 }

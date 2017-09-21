@@ -8,19 +8,20 @@ import (
 	"github.com/jeongseop/jsweb/app/models"
 	r "github.com/revel/revel"
 	"log"
+	"errors"
 )
 
 var (
 	Dbm *gorp.DbMap
 )
 
-func getConnectionString() string {
+func getConnectionString() (string, error) {
 	Config := NewCustomConfig()
-	if Config.LoadConfig("db.conf") != nil {
-		return ""
+	if err := Config.LoadConfig("db.conf"); err != nil {
+		return "", err
 	}
 	if !Config.SetSection("DEFAULT") {
-		return ""
+		return "", errors.New("Set Section Failed")
 	}
 	host := Config.GetStringDefault("db.host", "localhost")
 	port := Config.GetStringDefault("db.port", "3306")
@@ -31,12 +32,12 @@ func getConnectionString() string {
 
 	log.Printf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
 
-	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name)
+	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s", user, password, protocol, host, port, name), nil
 }
 
 func InitDB() {
-	dbConnectString := getConnectionString()
-	if dbConnectString == "" {
+	dbConnectString, err := getConnectionString()
+	if err != nil {
 		log.Fatal("getConnectionString failed!!!")
 	}
 	db, err := sql.Open("mysql", dbConnectString)

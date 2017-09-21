@@ -1,56 +1,56 @@
 package models
 
-import  (
-	"fmt"
+import (
 	"github.com/revel/revel"
 )
 
-
 type Blog struct {
-	BlogId         int       `db:"id"`
-	BlogName    string    `db:"name,size:64"`
-	BlogComment string    `db:"comment"`
-	Category    string    `db:"company,size:128"`
-	Position       string    `db:"position,size:16"`
-	StartDateTime  int64     `db:"start_date"`
-	EndDateTime    int64     `db:"end_date"`
-	LaunchUrl      string    `db:"launch_url"`
-
-	StartDate      string    `db:"-"`
-	EndDate        string    `db:"-"`
-	CommentList  []string    `db:"-"`
+	Id		int	`db:"id"`
+	Title		string	`db:"title"`
+	Content		string	`db:"content"`
+	Category	string	`db:"category"`
+	Type		string	`db:"type"`
+	WriteDateTime	int64	`db:"write_date_time"`
+	MainImage	string	`db:"main_image"`
+	MainLinkUrl	string	`db:"main_link_url"`
 }
 
-func (p *Blog) String() string {
-	return fmt.Sprintf("Portfolio(%s)", p.BlogName)
+type BlogReply struct {
+	Id		int	`db:"id"`
+	Comment		string	`db:"comment"`
+	WriterName	string	`db:"writer_name"`
+	Password	[]byte	`db:"password"`
+	WriteDateTime	int64	`db:"write_date_time"`
+	BlogId		int	`db:"blog_id"`
+	ReplyGroup	int	`db:"reply_group"`
+	Depth		int	`db:"depth"`
+	Order		int	`db:"order"`
+
+	InputPassword	string	`db:"-"`
 }
 
-func (p *Blog) Validate(v *revel.Validation) {
-	v.Check(p.BlogName,
+func (b *Blog) Validate(v *revel.Validation){
+	v.Check(b.Title,
 		revel.Required{},
-		revel.MaxSize{64},
-	).Message("ProjectName 입력 오류!!")
-	v.Check(p.BlogComment,
-		revel.Required{},
-		revel.MaxSize{2048},
-	).Message("ProjectComment 입력 오류!!")
-	v.Check(p.Category,
-		revel.Required{},
-		revel.MaxSize{128},
-	).Message("CompanyName 입력 오류!!")
-	v.Check(p.Position,
-		revel.Required{},
-		revel.MaxSize{16},
-	).Message("Position 입력 오류!!")
-	v.Check(p.LaunchUrl,
-		revel.MaxSize{255},
-	).Message("LaunchUrl 입력 오류!!")
+		revel.MaxSize{255})
+	v.Check(b.Category,
+		revel.Required{})
+	v.Check(b.Type,
+		revel.Required{})
+}
 
-	var err error
-	if p.StartDateTime, err = ValidDate(p.StartDate);  err != nil {
-		v.Error("StartDate 입력 오류!!")
-	}
-	if p.EndDateTime, err = ValidDate(p.EndDate);  err != nil {
-		v.Error("EndDate 입력 오류!!")
-	}
+func (br *BlogReply) Validate(v *revel.Validation){
+	v.Check(br.Comment,
+		revel.Required{})
+	v.Check(br.BlogId,
+		revel.Required{})
+	v.Check(br.WriterName,
+		revel.Required{},
+		revel.MaxSize{32})
+	v.Check(br.ReplyGroup,
+		revel.Required{})
+	v.Check(br.Depth,
+		revel.Required{})
+
+	ValidatePassword(v, br.InputPassword).Key("br.Password")
 }

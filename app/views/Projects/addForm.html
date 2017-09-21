@@ -39,12 +39,12 @@
 						
 						<p>
 							<label for="startDate">Start Date</label>
-							<input name="startDate"  id="startDate" type="text" class="form-poshytip" title="프로젝트 시작일을 입력하세요" {{if .project}}value="{{getStringFromUnixnano .project.StartDateTime}}"}}{{end}} />
+							<input name="startDate"  id="startDate" type="text" class="form-poshytip" title="프로젝트 시작일을 입력하세요" {{if .project}}value="{{getStringFromUnix .project.StartDateTime}}"}}{{end}} />
 						</p>
 
 						<p>
 							<label for="endDate">End Date</label>
-							<input name="endDate"  id="endDate" type="text" class="form-poshytip" title="프로젝트 종료일을 입력하세요" {{if .project}}value="{{getStringFromUnixnano .project.StartDateTime}}"}}{{end}} />
+							<input name="endDate"  id="endDate" type="text" class="form-poshytip" title="프로젝트 종료일을 입력하세요" {{if .project}}value="{{getStringFromUnix .project.StartDateTime}}"}}{{end}} />
 						</p>
 
 						<p>
