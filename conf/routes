@@ -28,6 +28,7 @@ PUT     /projects/:id                           Projects.Update
 DELETE  /projects/:id                           Projects.Delete
 
 GET     /blogs                                  Blogs.List
+GET     /blogs/new                              Blogs.AddForm
 GET     /blogs/:id                              Blogs.View
 POST    /blogs/:id                              Blogs.Add
 PUT     /blogs/:id                              Blogs.Update

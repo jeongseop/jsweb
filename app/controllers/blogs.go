@@ -60,6 +60,6 @@ func (c Blogs) AddForm() revel.Result {
 		c.Response.Status = 401
 		return c.RenderError(errors.New("Unauthenticated"))
 	}
-	c.Response.Status = 501
-	return c.Render()
+	//c.Response.Status = 501
+	return c.RenderTemplate("Blogs/write.html")
 }

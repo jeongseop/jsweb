@@ -1,5 +1,4 @@
-{{set . "title" "single page"}}
-{{set . "body" "single"}}
+{{append . "moreScripts" "js/ckeditor/ckeditor.js"}}
 {{template "header.html" .}}
 		<!-- MAIN -->
 		<div id="main">
@@ -8,38 +7,30 @@
 			
 			<!-- masthead -->
 			<div class="masthead cf">
-				OUR BLOG
+				메인제목?
 			</div>
 			<!-- ENDS masthead -->
 			
 			
 				
 			<!-- posts list -->
-        	<div id="posts-list" class="cf">        	
+        	<div id="posts-list" class="cf" style="width:100%">
 	        		
 	        		
 				<!-- Standard -->
 				<article class="format-standard">
 					<div class="feature-image">
-						<img src="/public/img/dummies/slides/01.jpg" alt="Alt text" />
+						<!--<img src="/public/img/dummies/slides/01.jpg" alt="Alt text" />-->
 					</div>
 					<div class="box cf">
-						<div class="entry-date"><div class="number">23</div><div class="month">JAN</div></div>
+						<!--<div class="entry-date"><div class="number">23</div><div class="month">JAN</div></div>-->
 						
-						<div class="excerpt">
-							<div class="post-heading" >LOREM IPSUM DOLOR AMET</div>
+						<div class="excerpt" style="width:95%;">
+							<div class="post-heading" ><input type="text" id="Title" name="Title" value="글 제목"/></div>
 							<div class="entry-content">
-								<p>content</p>
+								<textarea class="ckeditor" id="Content" name="Content" cols="40" rows="80">글 내용!!</textarea>
 							</div>
 						</div>
-						<!--
-						<div class="meta">
-							<span class="format">Post</span>
-							<span class="user"><a href="#">By LuisZuno, </a></span>
-							<span class="comments">16 comments</span>
-							<span class="tags"><a href="#">red</a>, <a href="#">cyan</a>, <a href="#">white</a>, <a href="#">blue</a></span>
-						</div>
-							-->
 					</div>
 				</article>
 				<!-- ENDS  Standard -->
@@ -182,43 +173,6 @@
 				
     		</div>
     		<!-- ENDS posts list -->
-			
-			<!-- sidebar -->
-        	<aside id="sidebar">
-        		
-        		<ul>
-	        		<li class="block">
-		        		<h4>Text Widget</h4>
-						Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. 
-	        		</li>
-	        		
-	        		<li class="block">
-		        		<h4>Categories</h4>
-						<ul>
-							<li class="cat-item"><a href="#" title="title">Film and video<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Print<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Photo and lomo<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Habitant morbi<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Film and video<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Print<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Photo and lomo<span class="post-counter"> (2)</span></a></li>
-							<li class="cat-item"><a href="#" title="title">Habitant morbi<span class="post-counter"> (2)</span></a></li>
-						</ul>
-	        		</li>
-	        		
-	        		<li class="block">
-		        		<h4>Archives</h4>
-						<ul>
-							<li class="cat-item"><a href="#" title="title">January</a></li>
-							<li class="cat-item"><a href="#" title="title">February</a></li>
-							<li class="cat-item"><a href="#" title="title">March</a></li>
-						</ul>
-	        		</li>
-        		
-        		</ul>
-        		
-        	</aside>
-			<!-- ENDS sidebar -->
 			
 			
 			</div><!-- ENDS WRAPPER -->
